@@ -5,7 +5,6 @@ require("dotenv").config();
 const typeDefs = require("./typeDefs");
 const resolvers = require("./resolvers");
 
-
 mongoose
   .connect(process.env.MONGO_URI, { useNewUrlParser: true })
   .then(() => console.log("DB connected!"))
