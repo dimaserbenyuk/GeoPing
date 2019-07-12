@@ -2,7 +2,7 @@ const User = require("../models/User");
 const { OAuth2Client } = require("google-auth-library");
 const client = new OAuth2Client(process.env.OAUTH_CLIENT_ID);
 
-exports = async token => {
+exports.findOrCreateUser = async token => {
   // verify auth token
   const googleUser = await verifyAuthToken(token);
   // check if the user exists
@@ -30,4 +30,3 @@ const createNewUser = googleUser => {
   const user = { name, email, picture };
   return new User(user).save();
 };
-

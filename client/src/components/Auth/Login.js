@@ -18,7 +18,7 @@ const Login = ({ classes }) => {
       const client = new GraphQLClient('http://localhost:4000/graphql', {
         headers: { authorization: idToken }
       });
-      const { me } = await client.request(ME_QUERY)
+      const { me } = await client.request(ME_QUERY);
       dispatch({ type: "LOGIN_USER", payload: me });
     } catch (err) {
       onFailure(err);
@@ -41,7 +41,7 @@ const Login = ({ classes }) => {
         Welcome
       </Typography>
       <GoogleLogin
-        clientId="1002381896916-4jbnj2btb3dpgh20n2snri65ca3ka1f2.apps.googleusercontent.com"
+        clientId="1002381896916-0e19q3rb3nbb08m77bonro2a6ssb55da.apps.googleusercontent.com"
         onSuccess={onSuccess}
         onFailure={onFailure}
         isSignedIn={true}
