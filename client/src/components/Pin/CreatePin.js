@@ -52,6 +52,7 @@ const { state, dispatch } = useContext(Context);
     const { createPin } = await client.request(CREATE_PIN_MUTATION,
     variables)
     console.log("Pin create", { createPin })
+    dispatch({type: "CREATE_PIN", payload: createPin})
     handleDeleteDraft()
 
     } catch (err) {
