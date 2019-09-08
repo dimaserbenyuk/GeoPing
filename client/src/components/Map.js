@@ -65,6 +65,11 @@ const Map = ({ classes }) => {
     return isNewPin ? "limegreen" : 'darkblue';
   };
 
+  const handleSelectPin = pin => {
+    setPopup(pin)
+    dispatch({type: "SET_PIN", payload: pin})
+  }
+
   return (
   <div className={classes.root}>
     <ReactMapGL
@@ -118,7 +123,10 @@ const Map = ({ classes }) => {
           offsetLeft={-19}
           offsetTop={-37}
         >
-          <PinIcon size={40} color={highlightNewPin(pin)} />
+          <PinIcon 
+          onClick={()=> handleSelectPin(pin)}
+          size={40} 
+          color={highlightNewPin(pin)} />
         </Marker>
         ))}
 
