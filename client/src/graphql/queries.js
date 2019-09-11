@@ -28,7 +28,7 @@ export const GET_PINS_QUERY = `
       }
       comments {
         text
-        createsAt
+        createdAt
         author {
           _id
           name

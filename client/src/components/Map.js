@@ -6,14 +6,19 @@ import Button from "@material-ui/core/Button";
 import Typography from "@material-ui/core/Typography";
 import DeleteIcon from "@material-ui/icons/DeleteTwoTone";
 
-import { useClient } from '../client'
-import { GET_PINS_QUERY } from '../graphql/queries'
+import { Subscription } from "react-apollo";
+
+import { useClient } from "../client";
+import { GET_PINS_QUERY } from "../graphql/queries";
 import { DELETE_PIN_MUTATION } from "../graphql/mutations";
-import PinIcon from './PinIcon'
-import Blog from './Blog'
-import Context from '../context'
-import { from } from "apollo-link";
-//import { Typography } from "@material-ui/core";
+import {
+  PIN_ADDED_SUBSCRIPTION,
+  PIN_UPDATED_SUBSCRIPTION,
+  PIN_DELETED_SUBSCRIPTION
+} from "../graphql/subscriptions";
+import PinIcon from "./PinIcon";
+import Blog from "./Blog";
+import Context from "../context";
 
 const INITIAL_VIEWPORT = {
   latitude: 37.7577,
@@ -169,6 +174,32 @@ const Map = ({ classes }) => {
         )}
   
     </ReactMapGL>
+
+    {/* Subscriptions for Creating / Updating / Deleting Pins */}
+    <Subscription
+        subscription={PIN_ADDED_SUBSCRIPTION}
+        onSubscriptionData={({ subscriptionData }) => {
+          const { pinAdded } = subscriptionData.data;
+          console.log({ pinAdded });
+          dispatch({ type: "CREATE_PIN", payload: pinAdded });
+        }}
+      />
+      <Subscription
+        subscription={PIN_UPDATED_SUBSCRIPTION}
+        onSubscriptionData={({ subscriptionData }) => {
+          const { pinUpdated } = subscriptionData.data;
+          console.log({ pinUpdated });
+          dispatch({ type: "CREATE_COMMENT", payload: pinUpdated });
+        }}
+      />
+      <Subscription
+        subscription={PIN_DELETED_SUBSCRIPTION}
+        onSubscriptionData={({ subscriptionData }) => {
+          const { pinDeleted } = subscriptionData.data;
+          console.log({ pinDeleted });
+          dispatch({ type: "DELETE_PIN", payload: pinDeleted });
+        }}
+      />
 
     {/** Blog Area to add Pin Context*/}
     <Blog/>

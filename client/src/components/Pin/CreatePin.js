@@ -49,10 +49,8 @@ const { state, dispatch } = useContext(Context);
     const url = await handleImageUpload();
     const { latitude, longitude } = state.draft
     const variables = { title, image: url, content, latitude, longitude }
-    const { createPin } = await client.request(CREATE_PIN_MUTATION,
+    await client.request(CREATE_PIN_MUTATION,
     variables)
-    console.log("Pin create", { createPin })
-    dispatch({type: "CREATE_PIN", payload: createPin})
     handleDeleteDraft()
 
     } catch (err) {
