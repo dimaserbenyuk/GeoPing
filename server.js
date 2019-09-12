@@ -14,6 +14,9 @@ mongoose
 const server = new ApolloServer({
   typeDefs,
   resolvers,
+  introspection: true,
+  playground: true,
+  cors: true,
   context: async ({ req }) => {
     let authToken = null;
     let currentUser = null;
